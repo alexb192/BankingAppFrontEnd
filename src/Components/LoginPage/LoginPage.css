@@ -1,0 +1,12 @@
+.LoginPage {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+}
+
+.LoginPage > button {
+    height: 2rem;
+}

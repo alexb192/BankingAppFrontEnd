@@ -1,0 +1,9 @@
+.transaction {
+  display: flex;
+  flex-direction: row;
+  background-color: gray;
+}
+
+.transaction > p {
+  width: 25%;
+}

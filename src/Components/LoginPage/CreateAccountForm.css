@@ -1,0 +1,25 @@
+.CreateAccountForm {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+}
+
+.CreateAccountForm > label {
+    text-align: left;
+}
+
+.CreateAccountForm > input {
+    height: 2rem;
+    padding: 12px, 20px;
+    margin: 8px, 0;
+    font-size: large;
+    resize: none;
+}
+
+.CreateAccountForm > button {
+    height: 2rem;
+    margin-top: 10px
+}
