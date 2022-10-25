@@ -4,21 +4,18 @@ import './LoginForm.css';
 
 import { useStoreUpdate } from '../../LoginAuthenticator/LoginContext';
 
-function LoginForm () {
+function LoginForm() {
 
     const [state, setState] = useState();
 
-    const toggleLoggedIn = useStoreUpdate();
+    const storeLogInInformation = useStoreUpdate();
 
-    const LogInRequest = () => {
-        axios.post(`${process.env.REACT_APP_API}login/`, state)
-        .then((res) => {
-            if (res.status === 200)
-            toggleLoggedIn(state.username);
-        }).catch((err) => {
-            alert('Invalid credentials');
-            console.log(err);
-        })
+    const LogInRequest = async () => {
+        let resp = await (await axios.post(`${process.env.REACT_APP_API}login/`, state))
+
+        if (resp.status === 200) {
+            storeLogInInformation(state.username, resp.data.key);
+        }
     }
 
     const handleChange = (e) => {
@@ -26,7 +23,7 @@ function LoginForm () {
         const value = target.value;
         const name = target.name
 
-        setState({...state, [name]: value})
+        setState({ ...state, [name]: value })
     }
 
     return (

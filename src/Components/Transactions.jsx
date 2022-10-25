@@ -2,16 +2,15 @@ import './Transactions.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 function Transactions() {
 
   const cardNumber = 0; // set this later lol, maybe use redux?
   const [transactions, setTransactions] = useState();
-  const url = `${process.env.REACT_APP_API}gettransactions/${cardNumber}`;
 
-
-    const getData = () => {
-
+    useEffect(() => {
       let counter = 0;
+      const url = `${process.env.REACT_APP_API}gettransactions/${cardNumber}`;
 
       axios.get(url).then(res => {
         setTransactions(
@@ -25,11 +24,6 @@ function Transactions() {
           ))
         )
       })
-
-    }
-
-    useEffect(() => {
-      getData();
     }, [])
   
   return (

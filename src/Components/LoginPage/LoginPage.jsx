@@ -3,7 +3,6 @@ import LoginForm from './LoginForm';
 import CreateAccountForm from './CreateAccountForm';
 import './LoginPage.css'
 
-
 function LoginPage () {
 
     const [choice, setChoice] = useState(null);

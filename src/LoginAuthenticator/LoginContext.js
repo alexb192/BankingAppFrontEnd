@@ -12,11 +12,11 @@ export const useStoreUpdate = () => {
 }
 
 export const StoreProvider = ({children}) => {
-    const [store, setStore] = useState();
+    const [store, setStore] = useState({isLoggedIn: false});
 
     // we expect {username & isLoggedIn}
-    const storeLogInInformation = (username) => {
-        setStore({username: username, isLoggedIn: true});
+    const storeLogInInformation = (username, key) => {
+        setStore({username: username, isLoggedIn: true, key: key});
     }
 
     return (
