@@ -1,0 +1,10 @@
+.SideBar {
+    position: absolute;
+    display: flex;
+    text-align: right;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 7%;
+    height: 94vh;
+    margin-left: 93%;
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 import LoginPage from './Components/LoginPage/LoginPage';
-import Transactions from './Components/Transactions';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useStore } from './LoginAuthenticator/LoginContext';
 import HomePage from './Components/HomePage.jsx';
+import CardPage from './Components/CardPage/CardPage';
 
 function App() {
 
@@ -15,7 +15,7 @@ function App() {
       {store.isLoggedIn &&
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='ClientPage' element={<Transactions />} />
+          <Route path='card/:cardnumber' element={<CardPage />} />
         </Routes>
       } {!store.isLoggedIn &&
         <Routes>

@@ -2,21 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useStore } from '../LoginAuthenticator/LoginContext';
 import axios from 'axios';
 import './HomePage.css';
+import NavBar from './PageTemplates/NavBar';
+import SideBar from './PageTemplates/SideBar';
+// import Transactions from './CardPage/Transactions';
+
+import { Link } from 'react-router-dom'
 
 const HomePage = () => {
 
     const store = useStore();
 
     const [cards, setCards] = useState();
+    // const [transactions, setTransactions] = useState();
 
-    // res.data.map((transaction) => (
-    //     <ul className="transaction" key={counter++}>
-    //       <p>{transaction.sender.fname}</p>
-    //       <p>{transaction.receiver.fname}</p>
-    //       <p>{'$ ' + transaction.amount}</p>
-    //       <p>{(new Date(transaction.date)).toLocaleDateString()}</p>
-    //     </ul>
-    //   ))
+    // const openTransactions = (e) => {
+    //     setTransactions(<Transactions cardNumber={e.target.innerText} />)
+    // }
 
     useEffect(() => {
         axios.post(`${process.env.REACT_APP_API}getcards/${store.username}`, {username: store.username, key: store.key})
@@ -24,7 +25,8 @@ const HomePage = () => {
             setCards(
                 res.data.map(card => (
                 <ul className="card" key={card.cardNumber}>
-                    <p>{card.cardNumber}</p>
+                    {/* <p onClick={openTransactions}>{card.cardNumber}</p> */}
+                    <Link to={`card/${card.cardNumber}`}>{card.cardNumber}</Link>
                     <p>{card.cardHolder.fname} {card.cardHolder.lname}</p>
                     <p>${card.balance}<i>CAD</i></p>
                 </ul>
@@ -34,10 +36,23 @@ const HomePage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    // if (transactions)
+    // {
+    //     return (
+    //         <div>
+    //             {transactions}
+    //         </div>
+    //     )
+    // }
+    
     return (
-        <div className='cards'>
-            {cards}
-        </div>
+        <>
+            <NavBar />
+            <SideBar />
+            <div className='cards'>
+                {cards} 
+            </div>
+        </>
     )
 }
 

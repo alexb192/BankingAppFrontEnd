@@ -1,18 +1,21 @@
 import './Transactions.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { useStore } from '../../LoginAuthenticator/LoginContext'
+import { useParams } from 'react-router-dom';
 
 function Transactions() {
 
-  const cardNumber = 0; // set this later lol, maybe use redux?
+  // const cardNumber = props.cardNumber;
   const [transactions, setTransactions] = useState();
+  const store = useStore();
+  const { cardnumber } = useParams();
 
     useEffect(() => {
       let counter = 0;
-      const url = `${process.env.REACT_APP_API}gettransactions/${cardNumber}`;
+      const url = `${process.env.REACT_APP_API}gettransactions/${cardnumber}`;
 
-      axios.get(url).then(res => {
+      axios.post(url, {username: store.username, key: store.key}).then(res => {
         setTransactions(
           res.data.map((transaction) => (
             <ul className="transaction" key={counter++}>
@@ -24,6 +27,7 @@ function Transactions() {
           ))
         )
       })
+              // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
   
   return (

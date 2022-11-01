@@ -13,8 +13,9 @@ function LoginForm() {
     const LogInRequest = async () => {
         let resp = await (await axios.post(`${process.env.REACT_APP_API}login/`, state))
 
+        // second param is login status, true => is logged in  
         if (resp.status === 200) {
-            storeLogInInformation(state.username, resp.data.key);
+            storeLogInInformation(state.username, true, resp.data.key);
         }
     }
 
