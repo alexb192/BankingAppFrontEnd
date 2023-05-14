@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { useStoreUpdate } from '../../LoginAuthenticator/LoginContext';
 import './NavBar.css';
 
-const NavBar = () => {
+const NavBar = (props) => {
 
     const logOutUpdate = useStoreUpdate();
 
     const LogOut = () => {
         logOutUpdate(null, false, null);
+        props.cookies.remove('auth', {path: '/'}); // remove our cookie ( end session )
     }
 
     return (
@@ -20,4 +21,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default NavBar 

@@ -4,11 +4,12 @@ import axios from 'axios';
 import './HomePage.css';
 import NavBar from './PageTemplates/NavBar';
 import SideBar from './PageTemplates/SideBar';
+import { withCookies } from 'react-cookie';
 // import Transactions from './CardPage/Transactions';
 
 import { Link } from 'react-router-dom'
 
-const HomePage = () => {
+const HomePage = (props) => {
 
     const store = useStore();
 
@@ -47,7 +48,7 @@ const HomePage = () => {
     
     return (
         <>
-            <NavBar />
+            <NavBar cookies={props.cookies} />
             <SideBar />
             <div className='cards'>
                 {cards} 
@@ -56,4 +57,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage;
+export default withCookies(HomePage);

@@ -23,6 +23,7 @@ function Transactions() {
               <p>{transaction.receiver.fname}</p>
               <p>{'$ ' + transaction.amount}</p>
               <p>{(new Date(transaction.date)).toLocaleDateString()}</p>
+              <hr/>
             </ul>
           ))
         )
@@ -31,7 +32,7 @@ function Transactions() {
     }, [])
   
   return (
-    <div className="Transactions">
+    <div className="transactions">
       <h1>Transactions</h1>
       <ul className="transactions_table">
         {transactions}

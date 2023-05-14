@@ -6,7 +6,7 @@ const SideBar = () => {
     return (
         <div className='SideBar'>
             <Link>Open Card</Link>
-            <Link>Transfer</Link>
+            <Link to='/transfer'>Transfer</Link>
             <Link>Withdraw</Link>
             <Link>Deposit</Link>
         </div>

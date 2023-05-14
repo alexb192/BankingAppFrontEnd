@@ -2,15 +2,16 @@ import React, {useState} from 'react';
 import LoginForm from './LoginForm';
 import CreateAccountForm from './CreateAccountForm';
 import './LoginPage.css'
+import { withCookies } from 'react-cookie';
 
-function LoginPage () {
+function LoginPage (props) {
 
     const [choice, setChoice] = useState(null);
 
 
     if (choice === 'Login')
         return (
-            <LoginForm />
+            <LoginForm props={props.cookies}/>
         )
     else if (choice === 'CreateAccount')
         return (
@@ -26,4 +27,4 @@ function LoginPage () {
     }
 }
 
-export default LoginPage;
+export default withCookies(LoginPage);

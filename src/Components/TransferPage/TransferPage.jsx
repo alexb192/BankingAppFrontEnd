@@ -1,18 +1,18 @@
 import React from 'react';
-import Transactions from './Transactions';
+import Transfer from './Transfer';
 import NavBar from '../PageTemplates/NavBar';
 import SideBar from '../PageTemplates/SideBar';
 import { withCookies } from 'react-cookie';
 
-const CardPage = (props) => {
+const TransferPage = (props) => {
 
     return (
         <>
-            <NavBar cookies={props.cookies} />
+            <NavBar props={props.cookies}/>
             <SideBar />
-            <Transactions />
+            <Transfer />
         </>
     )
 }
 
-export default withCookies(CardPage);
+export default withCookies(TransferPage);

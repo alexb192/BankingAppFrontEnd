@@ -3,8 +3,9 @@ import axios from 'axios';
 import './LoginForm.css';
 
 import { useStoreUpdate } from '../../LoginAuthenticator/LoginContext';
+import { withCookies } from 'react-cookie';
 
-function LoginForm() {
+function LoginForm(props) {
 
     const [state, setState] = useState();
 
@@ -15,7 +16,9 @@ function LoginForm() {
 
         // second param is login status, true => is logged in  
         if (resp.status === 200) {
+            console.log(resp.data.key);
             storeLogInInformation(state.username, true, resp.data.key);
+            props.cookies.set('auth', {username: state.username, key: resp.data.key}, {path: '/'});
         }
     }
 
@@ -43,4 +46,4 @@ function LoginForm() {
 
 }
 
-export default LoginForm
+export default withCookies(LoginForm);
