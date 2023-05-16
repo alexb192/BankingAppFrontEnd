@@ -12,7 +12,7 @@ function LoginForm(props) {
     const storeLogInInformation = useStoreUpdate();
 
     const LogInRequest = async () => {
-        let resp = await (await axios.post(`${process.env.REACT_APP_API}login/`, state))
+        let resp = await axios.post(`${process.env.REACT_APP_API}login/`, state);
 
         // second param is login status, true => is logged in  
         if (resp.status === 200) {

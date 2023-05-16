@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import LoginPage from './Components/LoginPage/LoginPage';
 import axios from 'axios';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -18,24 +18,38 @@ function App(props) {
   const [loaded, setLoaded] = useState(false);
   // if the user already has a username and key try authenticating with it
   // use onComponentMount, we don't want it to try re-authenticating
+  
+  if (!loaded) // we only want to fire this up when the page is being loaded
+  {
 
-  useEffect(() => {
-    if (!store.username) {
+    if (!store.username) 
+    {
       let cookies = props.cookies.get('auth');
-    if (!cookies) return; // there is no cookie, don't try authenticating.
-    const resp = axios.post(`${process.env.REACT_APP_API}authenticate`, {username: cookies.username, key: cookies.key});
-    resp.then((resp) => {
-      if (resp.status === 200)
+      
+      if (!cookies) // if there is no cookie, just load the
       {
-        storeLogInInformation(cookies.username, true, cookies.key);
+        setLoaded(true);
+        return;
       }
-      setLoaded(true);
-    })
-    }
-  })
 
-  return (
-    <BrowserRouter>
+      const resp = axios.post(`${process.env.REACT_APP_API}authenticate`, {username: cookies.username, key: cookies.key});
+      
+      resp.then((resp) => {
+        if (resp.status === 200)
+        {
+          storeLogInInformation(cookies.username, true, cookies.key);
+          setLoaded(true);
+        }
+      }).catch(() => {
+        console.log('invalid cookie');
+        props.cookies.remove('auth', {path: '/'}); // remove outdated cookie
+        setLoaded(true);
+      })
+    }
+  }
+    
+    return (
+      <BrowserRouter>
       {store.isLoggedIn && loaded &&
         <Routes>
           <Route path='/' element={<HomePage cookies={props.cookies}/>} />
