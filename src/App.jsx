@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginPage from './Components/LoginPage/LoginPage';
+import LoginForm from './Components/LoginPage/LoginForm';
 import axios from 'axios';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useStore, useStoreUpdate } from './LoginAuthenticator/LoginContext';
@@ -58,7 +58,7 @@ function App(props) {
         </Routes>
       } {!store.isLoggedIn && loaded &&
         <Routes>
-          <Route path='/' element={<LoginPage />} cookies={props.cookies} />
+          <Route path='/' element={<LoginForm />} />
         </Routes>
       }
     </BrowserRouter>

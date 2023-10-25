@@ -1,32 +1,36 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './LoginForm.css';
 
 import { useStoreUpdate } from '../../LoginAuthenticator/LoginContext';
 import { TextField, Box, Button, Container, Typography, FormControlLabel, Checkbox } from '@mui/material';
-import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { withCookies } from 'react-cookie';
 
-function LoginForm(props) {
+function CreateAccount(props) {
 
     const [state, setState] = useState();
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (e) => e.preventDefault();
 
     const storeLogInInformation = useStoreUpdate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        let resp = await axios.post(`${process.env.REACT_APP_API}login/`, state);
-        console.log(resp.status);
+    const handleLogIn = async () => {
+        let resp = await axios.post(`${process.env.REACT_APP_API}login/`, {username: state.username, password: state.password});
+
         // second param is login status, true => is logged in  
         if (resp.status === 200) {
             storeLogInInformation(state.username, true, resp.data.key);
             props.cookies.set('auth', {username: state.username, key: resp.data.key}, {path: '/'});
         }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        axios.post(`${process.env.REACT_APP_API}createaccount`, state)
+        .then((res) => {
+            if (res.status === 200)
+            console.log(res.status);
+            handleLogIn(); // we log in now with our freshly created account
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     const handleChange = (e) => {
@@ -37,16 +41,18 @@ function LoginForm(props) {
         setState({ ...state, [name]: value })
     }
 
-    return (
+    const regEx = {
+        username: "[a-zA-Z0-9_]"}
+    }
 
+    return (
         <Container component="main" maxWidth="xs">
             <Box component="form" onSubmit={handleSubmit} className='flex flex-col items-center justify-items-center mt-8'>
                 <Typography component="h1" variant="h5">Sign In</Typography>
-                <TextField inputProps={{pattern: '[a-zA-Z0-9_]+'}} margin="normal" label="Username" variant="outlined" name='username' type='username' required={true} onKeyUp={handleChange} autoFocus fullWidth />
+                <TextField margin="normal" label="Username" variant="outlined" name='username' type='username' required={true} onKeyUp={handleChange} autoFocus fullWidth />
                 <FormControl variant="outlined" fullWidth>
                     <InputLabel>Password</InputLabel>
                     <OutlinedInput 
-                        inputProps={{pattern: '^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$'}}
                         name='password'
                         fullWidth
                         onKeyUp={handleChange}
@@ -66,13 +72,15 @@ function LoginForm(props) {
                         }
                         label="Password"
                     />
-                    </FormControl>
-                    <Box className='flex items-center justify-between min-w-full'>
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button>Sign Up</Button>
+                </FormControl>
+                <TextField margin="normal" label="Password" variant="outlined" name='verifyPassword' type='password' required={true} onKeyUp={handleChange} autoFocus fullWidth />
+                <Box className='flex items-center justify-between min-w-full'>
+                    <TextField label="First Name" variant='outlined' name='fname' type='text' required='true' onKeyUp={handleChange} />
+                    <TextField label="Last Name" variant='outlined' name='lname' type='text' required='true' onKeyUp={handleChange} />
+                </Box>
+                <Box className='flex items-center justify-between min-w-full'>
+                    <TextField label="Phone Number" variant='outlined' name='pnumber' type='text' required='true' onKeyUp={handleChange} />
+                    <TextField label="Address" variant='outlined' name='address' type='text' required='true' onKeyUp={handleChange} />
                 </Box>
                 <Button type='submit' className='mt-3' fullWidth variant='contained'>Sign In</Button>
             </Box>
@@ -81,4 +89,4 @@ function LoginForm(props) {
 
 }
 
-export default withCookies(LoginForm);
+export default withCookies(CreateAccount);
