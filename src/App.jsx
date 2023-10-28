@@ -1,13 +1,14 @@
 import React from 'react';
-import LoginForm from './Components/LoginPage/LoginForm';
 import axios from 'axios';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useStore, useStoreUpdate } from './LoginAuthenticator/LoginContext';
+import { withCookies } from 'react-cookie';
+import { useState } from 'react';
 import HomePage from './Components/HomePage.jsx';
 import CardPage from './Components/CardPage/CardPage';
 import TransferPage from './Components/TransferPage/TransferPage';
-import { withCookies } from 'react-cookie';
-import { useState } from 'react';
+import SignUpPage from './Components/LoginPage/SignUpPage';
+import LogInPage from './Components/LoginPage/LogInPage';
 
 // we need any time someone pops into our site to first have their cookies checked
 
@@ -58,7 +59,8 @@ function App(props) {
         </Routes>
       } {!store.isLoggedIn && loaded &&
         <Routes>
-          <Route path='/' element={<LoginForm />} />
+          <Route path='/signup' element={<SignUpPage cookies={props.cookies} />} />
+          <Route path='/' element={<LogInPage cookies={props.cookies} />} />
         </Routes>
       }
     </BrowserRouter>
