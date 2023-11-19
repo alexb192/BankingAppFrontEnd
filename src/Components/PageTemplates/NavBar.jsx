@@ -2,9 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useStoreUpdate } from '../../LoginAuthenticator/LoginContext';
-import './NavBar.css';
 import { withCookies } from 'react-cookie';
-
 
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -36,8 +34,8 @@ const NavBar = (props) => {
     }
 
     return (
-        <div className='flex justify-between'>
-            <Button id="basic-button"><Link to="/">Home</Link></Button>
+        <div className='flex justify-between text-xl'>
+            <Button href='/' id="basic-button">Home</Button>
             <Button
                 id="basic-button"
                 aria-controls={open ? 'basic-menu' : undefined}

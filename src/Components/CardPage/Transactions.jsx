@@ -1,4 +1,3 @@
-import './Transactions.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useStore } from '../../LoginAuthenticator/LoginContext'

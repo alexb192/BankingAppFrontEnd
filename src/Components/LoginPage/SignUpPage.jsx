@@ -100,8 +100,8 @@ function SignUpPage(props) {
                 </FormControl>
                 <TextField helperText='Password must match' error={failedPasswordMatch} inputProps={{pattern: '^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$'}} label="Verify Password" variant="outlined" name='verifyPassword' type='password' required={true} onKeyUp={handleChange} autoFocus fullWidth />
                 <Box className='flex items-center justify-between min-w-full gap-3'>
-                    <TextField  inputProps={{pattern: '^[a-zA-Z]{3,}$'}} label="First Name" variant='outlined' name='fname' type='text' required={true} onKeyUp={handleChange} />
-                    <TextField label="Last Name" variant='outlined' name='lname' type='text' required={true} onKeyUp={handleChange} />
+                    <TextField inputProps={{pattern: '^[a-zA-Z]{3,}$'}} label="First Name" variant='outlined' name='fname' type='text' required={true} onKeyUp={handleChange} />
+                    <TextField inputProps={{pattern: '^[a-zA-Z]{3,}$'}} label="Last Name" variant='outlined' name='lname' type='text' required={true} onKeyUp={handleChange} />
                 </Box>
                 <Box className='flex items-center justify-between min-w-full gap-3'>
                     <TextField label="Phone Number" variant='outlined' name='pnumber' type='text' inputProps={{pattern: '^[0-9]{10}$'}} required={true} onKeyUp={handleChange} />

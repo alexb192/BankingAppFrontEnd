@@ -6,7 +6,6 @@ import { withCookies } from 'react-cookie';
 import { useState } from 'react';
 import HomePage from './Components/HomePage.jsx';
 import CardPage from './Components/CardPage/CardPage';
-import TransferPage from './Components/TransferPage/TransferPage';
 import SignUpPage from './Components/LoginPage/SignUpPage';
 import LogInPage from './Components/LoginPage/LogInPage';
 
@@ -55,7 +54,6 @@ function App(props) {
         <Routes>
           <Route path='/' element={<HomePage cookies={props.cookies}/>} />
           <Route path='card/:cardnumber' element={<CardPage cookies={props.cookies} />} />
-          <Route path='/transfer' element={<TransferPage cookies={props.cookies}/>} />
         </Routes>
       } {!store.isLoggedIn && loaded &&
         <Routes>
