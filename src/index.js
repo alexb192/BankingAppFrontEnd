@@ -15,7 +15,7 @@ root.render(
   <CookiesProvider>
     <React.StrictMode>
       <StoreProvider>
-        <App />
+        <App/>
       </StoreProvider>
     </React.StrictMode>
   </CookiesProvider>

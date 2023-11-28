@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useStore } from '../../LoginAuthenticator/LoginContext';
 import { Autocomplete, TextField, Box, Button, InputAdornment } from '@mui/material';
 
-const Transfer = () => {
+const Transfer = (props) => {
 
     const defaultState = {
         sender: '',
@@ -16,7 +16,7 @@ const Transfer = () => {
         amountFieldHelperText: '',
     }
 
-    const [cards, setCards] = useState();
+    const [cards, setCards] = useState(props.cards);
     const [state, setState] = useState(defaultState);
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState(defaultHelperText)
@@ -81,7 +81,7 @@ const Transfer = () => {
       }, [])
 
     return (
-        <Box className='flex flex-col gap-3 mr-3' component='form' onSubmit={handleSubmit}>
+        <Box className={props.className + ' flex flex-col gap-3 ml-3 mr-3'} component='form' onSubmit={handleSubmit}>
             <Autocomplete
                 value={state.sender}
                 inputValue={state.sender}

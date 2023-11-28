@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useStore } from '../LoginAuthenticator/LoginContext';
 import axios from 'axios';
 import NavBar from './PageTemplates/NavBar';
-import SideBar from './PageTemplates/SideBar';
+import Transfer from './PageTemplates/Transfer';
 import { withCookies } from 'react-cookie';
 
 import { Link } from 'react-router-dom'
-import { Box, Table, TableCell, TableContainer, TableRow, Container, TableBody } from '@mui/material';
+import { Box, Table, TableCell, TableContainer, TableRow, TableBody } from '@mui/material';
 
 const HomePage = (props) => {
 
     const [cards, setCards] = useState();
-
     const store = useStore();
 
-        useEffect(() => {
+    useEffect(() => {
         axios.post(`${process.env.REACT_APP_API}getcards/${store.username}`, {username: store.username, key: store.key})
         .then(res => {
             setCards(
@@ -31,11 +30,10 @@ const HomePage = (props) => {
     }, [])
 
     return (
-        <>
-            <NavBar cookies={props.cookies} />
-            <Box className='flex flex-row-reverse'>
-            <SideBar className='sticky' />
-                <Container maxWidth='md'>
+        <Box>
+            <NavBar cookies={props.cookies}/>
+            <Box className='flex flex-col md:flex-row justify-between mt-12'>
+                <Box className='m-6 flex-1'>
                     <TableContainer>
                         <Table>
                             <TableBody>
@@ -43,9 +41,10 @@ const HomePage = (props) => {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                </Container>
+                </Box>
+                <Transfer className='self-center w-96' />
             </Box>
-        </>
+        </Box>
     );
 
 }

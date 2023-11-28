@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../PageTemplates/NavBar';
-import SideBar from '../PageTemplates/SideBar';
+import { Transfer } from '../PageTemplates/Transfer';
 import { withCookies } from 'react-cookie';
 import { useStore } from '../../LoginAuthenticator/LoginContext';
 import axios from 'axios';
@@ -20,7 +20,7 @@ const CardPage = (props) => {
     return (
         <>
             <NavBar props={props.cookies}/>
-            <SideBar />
+            <Transfer />
             <div>
                 <h1>
                     Open New Card
